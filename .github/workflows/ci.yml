@@ -9,7 +9,6 @@ jobs:
   tests:
     name: Tests
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -19,5 +18,19 @@ jobs:
         with:
           go-version: '1.23.0'
 
-      - name: Force Failure 
+      - name: Run Tests 
         run: go test ./... -cover
+  style:
+    name: Stype
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Go 
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.23.0'
+
+      - name: Run Style Check 
+        run: test -z $(go fmt ./...)
